@@ -339,11 +339,11 @@ func (s saveStatusArgs) Includes(search int) bool {
 // 	return strings.ReplaceAll(re.ReplaceAllString(u.Path, "-"), "/", "-")
 // }
 func normalisePath(u *url.URL) string {
-    // Replace non-alphanumeric characters, underscores, and hyphens with underscores
+    // Replace non-alphanumeric characters, underscores, and hyphens with hyphens
     re := regexp.MustCompile(`[^a-zA-Z0-9._-]+`)
-    pathWithUnderscores := re.ReplaceAllString(u.Path, "-")
+    pathWithHyphens := re.ReplaceAllString(u.Path, "-")
 
-    // Remove leading underscores
-    return strings.TrimLeft(pathWithUnderscores, "-")
+    // Remove leading hyphens
+    return strings.TrimLeft(pathWithHyphens, "-")
 }
 
