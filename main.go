@@ -333,9 +333,17 @@ func (s saveStatusArgs) Includes(search int) bool {
 // 	re := regexp.MustCompile(`[^a-zA-Z0-9/._-]+`)
 // 	return re.ReplaceAllString(u.Path, "-")
 // }
-// prevent nested folders
+// // prevent nested folders
+// func normalisePath(u *url.URL) string {
+// 	re := regexp.MustCompile(`[^a-zA-Z0-9/._-]+`)
+// 	return strings.ReplaceAll(re.ReplaceAllString(u.Path, "-"), "/", "-")
+// }
 func normalisePath(u *url.URL) string {
-	re := regexp.MustCompile(`[^a-zA-Z0-9/._-]+`)
-	return strings.ReplaceAll(re.ReplaceAllString(u.Path, "-"), "/", "-")
+    // Replace non-alphanumeric characters, underscores, and hyphens with underscores
+    re := regexp.MustCompile(`[^a-zA-Z0-9._-]+`)
+    pathWithUnderscores := re.ReplaceAllString(u.Path, "-")
+
+    // Remove leading underscores
+    return strings.TrimLeft(pathWithUnderscores, "-")
 }
 
