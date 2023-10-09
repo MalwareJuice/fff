@@ -1,3 +1,3 @@
-module github.com/tomnomnom/fff
+module github.com/MalwareJuice/fff
 
 go 1.16
