@@ -329,7 +329,13 @@ func (s saveStatusArgs) Includes(search int) bool {
 	return false
 }
 
+// func normalisePath(u *url.URL) string {
+// 	re := regexp.MustCompile(`[^a-zA-Z0-9/._-]+`)
+// 	return re.ReplaceAllString(u.Path, "-")
+// }
+// prevent nested folders
 func normalisePath(u *url.URL) string {
 	re := regexp.MustCompile(`[^a-zA-Z0-9/._-]+`)
-	return re.ReplaceAllString(u.Path, "-")
+	return strings.ReplaceAll(re.ReplaceAllString(u.Path, "-"), "/", "-")
 }
+
